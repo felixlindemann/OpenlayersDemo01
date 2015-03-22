@@ -73,6 +73,10 @@ var olMapControls = {
       Styles: ['Road','Aerial','AerialWithLabels']
     },
     Tiles: [],
+    addTile: function(tile){
+      this.Tiles.push(tile);
+      olMapControls.map.olmap.addLayer(tile.oTile);
+    },
     Prepare: function(){   
       this.Tiles.push({
         isOverlay: false,

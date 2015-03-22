@@ -12,7 +12,8 @@ $( document ).ready(function() {
 $("#" + olMapControls.map.div).on('initialized', function(){    
     // add Custom Controls 
     addControls();
-   });
+
+});
 
 
 function addControls(){ 
@@ -25,26 +26,23 @@ function addControls(){
     evt.preventDefault();
     olMapControls.ZoomOut();
   });  
-  $('#btnAddDemo').click(function (evt) {
-    evt.preventDefault();
-    addCustomLayer();
-  }); 
+  // Add Tile-Layers
   $.each(olMapControls.Layers.Tiles, function( index, value ) {  
     if(value.isOverlay == false){
-      AddButtonToMapStyle(index, value);
+      AddButtonToMapStyle("#mapstyles", index, value);
     }
   });
+  // Add-Overlays
   $.each(olMapControls.Layers.Tiles, function( index, value ) {  
     if(value.isOverlay == true){
-      AddButtonToOverlay(index, value);
+      AddButtonToOverlay("#overlays", index, value);
     }
   });
 
 };
 
-function AddButtonToMapStyle(index, value){ 
-  var parent = "#mapstyles"; // The Bootstrap-DropDown
-
+function AddButtonToMapStyle(parent,index, value){ 
+  
   var isVisible = value.oTile.get('visible') == true;
   var title = value.oTile.get('title') ;   
    
@@ -69,9 +67,8 @@ function AddButtonToMapStyle(index, value){
 
 }
  
-function AddButtonToOverlay(index, value){ 
-  var parent = "#overlays"; // The Bootstrap-DropDown
-
+function AddButtonToOverlay(parent,index, value){ 
+  
   var isVisible = value.oTile.get('visible') == true;
   var title = value.oTile.get('title') ;  
   
@@ -94,34 +91,4 @@ function AddButtonToOverlay(index, value){
 
 }
  
-
-function addCustomLayer(){
-
-  // http://erilem.net/ol3/master/examples/xyz-esri.js
-  // add own tiles 
-  var tile = {
-    isOverlay: false,
-    oTile: new ol.layer.Tile({
-      title: "ESRI",
-      source: new ol.source.XYZ({
-        attributions: [
-          new ol.Attribution({
-            html: 'Tiles &copy; <a href="http://services.arcgisonline.com/ArcGIS/' +
-                'rest/services/World_Topo_Map/MapServer">ArcGIS</a>'
-          })
-        ],
-        url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
-            'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-      })
-    })
-  };
-  olMapControls.Layers.Tiles.push(tile);
-  if(tile.isOverlay){
-    AddButtonToMapStyle(olMapControls.Layers.Tiles.length, tile);
-  }else{
-    AddButtonToOverlay(olMapControls.Layers.Tiles.length, tile);
-  }
-  olMapControls.setCenter(-121.1, 47.5, 7);
-};
-
 
