@@ -52,7 +52,14 @@ var olMapControls = {
       loadTilesWhileInteracting: true 
     });
     $.each(olMapControls.Layers.Tiles, function( index, value ) {  
-      olMapControls.map.olmap.addLayer(value.oTile);
+      if(value.isOverlay){}else{
+        olMapControls.map.olmap.addLayer(value.oTile);
+      }
+    });
+    $.each(olMapControls.Layers.Tiles, function( index, value ) {  
+      if(value.isOverlay){ 
+        olMapControls.map.olmap.addLayer(value.oTile);
+      }
     });
     // Raise event
     $("#" + this.map.div).trigger({
@@ -123,6 +130,17 @@ var olMapControls = {
           }) 
         })
        });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "OpenStreetMap: OpenCycleMap Landscape", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tile.opencyclemap.org/landscape/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
    
 
       this.Tiles.push({
@@ -150,9 +168,31 @@ var olMapControls = {
             maxZoom: 11
           })
         })
+       }); 
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "OpenStreetMap: Mapnik", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "OpenStreetMap: Mapnik (Black/White)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'
+          }) 
+        })
        });
    
-
+ 
       this.Tiles.push({
         isOverlay: false,
         oTile: new ol.layer.Tile({
@@ -165,6 +205,272 @@ var olMapControls = {
           }) 
         }) 
       }); 
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "OpenStreetMap: Stamen-Terrain (America only)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.OSM({ 
+            url: 'http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
+          }) 
+        })
+       });
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "OpenStreetMap: Stamen-Toner", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.OSM({ 
+            url: 'http://tile.stamen.com/toner/{z}/{x}/{y}.jpg'
+          }) 
+        })
+       });
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Carto DB - Positron", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
+          })
+        })
+       });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Carto DB - Positron (no labels)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-d}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+            attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
+          })
+        })
+       });
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Carto DB - DarkMatter", 
+          visible: false,
+          preload: Infinity,
+           source: new ol.source.XYZ({ 
+            url: 'http://{a-d}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+            attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
+          })
+        })
+       }); 
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Carto DB - DarkMatter (no labels)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-d}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
+            attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
+          })
+        })
+       });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "ESRI",
+          visible: false,
+          source: new ol.source.XYZ({
+            attributions: [
+              new ol.Attribution({
+                html: 'Tiles &copy; <a href="http://services.arcgisonline.com/ArcGIS/' +
+                    'rest/services/World_Topo_Map/MapServer">ArcGIS</a>'
+              })
+            ],
+            url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
+                'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+          })
+        })
+      });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "4U Maps EU", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://4umaps.eu/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "MTB map Europe (http://mtbmap.cz)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Reit- und Wanderkarte (http://www.wanderreitkarte.de/)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://topo2.wanderreitkarte.de/topo/{z}/{x}/{y}.png'
+          }) 
+        }) 
+       }); 
+ 
+
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Mapbox-Terrain", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'https://{a-c}.tiles.mapbox.com/v3/dennisl.map-dfbkqsr2/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Mapbox-Outdoors", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'https://{a-c}.tiles.mapbox.com/v3/aj.um7z9lus/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "WMF-Labs - Hike-Bike (http://hikebikemap.org/)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "WMF-Labs - Hill-Shadings (http://hikebikemap.org/)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'
+          }) 
+        })
+       }); 
+
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "WMF-Labs - Hill-Shadings 2 (http://hikebikemap.org/)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'
+          }) 
+        })
+       }); 
+
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "WMF-Labs - Hill-Shadings 3 (http://hikebikemap.org/)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'
+          }) 
+        })
+       }); 
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "WMF-Labs - Hill-Shadings 4 (http://hikebikemap.org/)", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://{a-c}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'
+          }) 
+        })
+       }); 
+
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "Waymarked Trails: Cycling", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "Waymarked Trails: MTB", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://tile.waymarkedtrails.org/mtb/{z}/{x}/{y}.png'
+          }) 
+        })
+       });
+      this.Tiles.push({
+        isOverlay: true,
+        oTile: new ol.layer.Tile({
+          title: "Waymarked Trails: Inline Skating", 
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({ 
+            url: 'http://tile.waymarkedtrails.org/skating/{z}/{x}/{y}.png'
+          }) 
+        })
+       }); 
+
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "OpenTopoMap",
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({
+            url: 'http://opentopomap.org/{z}/{x}/{y}.png'
+          })
+        }) 
+      }); 
+      
+      this.Tiles.push({
+        isOverlay: false,
+        oTile: new ol.layer.Tile({
+          title: "Natural Earth",
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({
+            url: 'http://{a-d}.tiles.mapbox.com/v3/mapbox.natural-earth-hypso-bathy/{z}/{x}/{y}.png'
+          })
+        }) 
+      }); 
+ 
       if(this.Bing.Key.length>0){
         for(i = 0; i< this.Bing.Styles.length; i++){ 
           this.Tiles.push({

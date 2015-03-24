@@ -9,7 +9,7 @@
         <meta name="author" content="">
         <!-- <link rel="icon" href="favicon.ico"> -->
         <title>Openlayers 3 Demo 01.</title> 
-        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/slate/bootstrap.min.css"        rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/spacelab/bootstrap.min.css"        rel="stylesheet">
         <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
          -->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"  rel="stylesheet">
@@ -19,7 +19,7 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <!-- User defined Changes-->
-        <link rel="stylesheet" href="css/ol.css">
+        <link rel="stylesheet" href="http://css.lime-tree.de/ol.css">
     </head>
     <body>
         <div class="container">
@@ -41,20 +41,23 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu" id="MapControls"> 
+                                    <li class="dropdown-submenu">
+                                        <a href="#" >Map Styles</span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" id="mapstyles"> 
+                                            <li role="presentation" class="dropdown-header">Select your favourite Mapstyle!</li>
+                                        </ul>
+                                    </li> 
+                                    <li class="dropdown-submenu">
+                                        <a href="#" >Overlays</span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" id="overlays">
+                                            <li role="presentation" class="dropdown-header">Overlays give additional information.</li>
+                                        </ul>
+                                    </li> 
+                                    <li class="divider"></li>
                                     <li><a id="btnZoomIn"  href="#">Zoom In</a></li>
                                     <li><a id="btnZoomOut" href="#">Zoom out</a></li> 
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Map Styles <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" id="mapstyles"> 
-                                </ul>
-                            </li> 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Overlays <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" id="overlays">
                                 </ul>
                             </li> 
                             <li><a id="btnAddDemo"  href="#">AddCustomLayer</a></li>
@@ -70,6 +73,7 @@
                 </div>
                 <div class="panel-body">
                     <div id="map" class="map"></div>
+                    <p>Tipp: Use <span class="label label-default">Alt</span> + <span class="label label-default">Shift</span> + drag to rotate the map. </p>
                 </div>
             </div>
         </div>
@@ -81,8 +85,8 @@
         <script src="http://openlayers.org/en/v3.3.0/build/ol.js" type="text/javascript"></script>
 
         <!-- Custom Scripts --> 
+        <script src="http://js.lime-tree.de/olMapControls.js"></script> 
         <script src="js/olMap.Demo.js"></script> 
-        <script src="js/olMapControls.js"></script> 
         <script src="js/olMap.js"></script> 
 
     </body>

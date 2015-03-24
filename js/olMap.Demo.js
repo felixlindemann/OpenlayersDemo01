@@ -2,6 +2,7 @@
   $('#btnAddDemo').click(function (evt) {
     evt.preventDefault();
     addCustomLayer();
+    $(this).parent().remove();
   }); 
 
 
@@ -28,10 +29,10 @@ function addCustomLayer(){
   olMapControls.Layers.addTile(tile);
 
   if(tile.isOverlay){
-    AddButtonToMapStyle(olMapControls.Layers.Tiles.length-1, tile);
+    AddButtonToMapStyle("overlays",olMapControls.Layers.Tiles.length-1, tile);
   }else{
-    AddButtonToOverlay(olMapControls.Layers.Tiles.length-1, tile);
+    AddButtonToOverlay("mapstyles",olMapControls.Layers.Tiles.length-1, tile);
   }
-  olMapControls.setCenter(-121.1, 47.5, 7);
+  olMapControls.setCenter(7.1942,51.2762, 12);
 };
 
